@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Now — Ordinate</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Ordinate Logo">
+                <span style="font-weight: 800; font-size: 1.25rem; color: var(--dark);">Ordinate</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="jobs.html">Find Jobs</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="nav-hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-mobile">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/jobs.html">Find Jobs</a>
+        <a href="/contact.html">Contact</a>
+    </div>
+
+    <main class="page-pad">
+        <header class="page-hero">
+            <div class="container">
+                <h1>Submit your <span>Application</span></h1>
+                <p>Join a world-class team. Tell us about yourself and your experience.</p>
+            </div>
+        </header>
+
+        <section class="section container">
+            <div class="apply-wrapper">
+                <div id="applyCard" class="card card-pad">
+                    <div id="jobBanner" class="apply-job-banner">
+                        <div class="job-icon"></div>
+                        <div>
+                            <h3 id="jobTitle">Position Name</h3>
+                            <p id="jobMeta" class="text-muted">Loading job details...</p>
+                        </div>
+                    </div>
+
+                    <form id="applyForm">
+                        <input type="hidden" id="jobId" name="job_id">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="first_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="last_name" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="+1 (416) 555-0199">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Years of Experience <span class="required">*</span></label>
+                            <input type="number" id="experience" name="years_of_experience" class="form-control" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Resume / CV (PDF or DOC) <span class="required">*</span></label>
+                            <div class="file-drop" id="fileDrop">
+                                <div class="file-icon"></div>
+                                <p id="fileNameDisplay">Drag and drop your file here or <span class="file-cta">Browse files</span></p>
+                                <p class="text-muted mt-8">Max file size: 5MB</p>
+                                <input type="file" id="resumeFile" name="resume" accept=".pdf,.doc,.docx" required>
+                            </div>
+                            <div id="fileError" class="form-error">Please upload a valid PDF or Word document.</div>
+                        </div>
+
+                        <div id="applyAlert" class="alert alert-hidden"></div>
+
+                        <button type="submit" class="btn btn-primary btn-full btn-lg mt-16">Submit Application</button>
+                    </form>
+                </div>
+
+                <div id="successView" class="apply-success">
+                    <div class="success-icon"></div>
+                    <h2>Application Received!</h2>
+                    <p>Thank you for applying for the <strong id="successJobTitle">position</strong> role. Our team will review your application and be in touch soon.</p>
+                    <a href="/jobs.html" class="btn btn-outline mt-32">Browse more jobs</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Ordinate Ltd.</p>
+        </div>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/apply.js"></script>
+</body>
+</html>

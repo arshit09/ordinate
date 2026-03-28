@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOTP Setup — Ordinate</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+</head>
+<body class="admin-layout" style="background: var(--surface-2);">
+    <div class="flex-center" style="min-height: 100vh; padding: 24px;">
+        <div class="card card-pad" style="max-width: 480px; width: 100%;">
+            <div class="text-center mb-24">
+                <img src="../assets/images/logo.png" style="height: 48px; margin: 0 auto 16px;">
+                <h2>TOTP Security Setup</h2>
+                <p class="text-muted">Configure your two-factor authenticator app</p>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Admin Required:</strong> You must be logged in to view these details.
+            </div>
+
+            <div id="setupContent">
+                <div class="spinner"></div>
+            </div>
+
+            <div class="mt-32 border-top pt-24 text-center">
+                <a href="/admin/dashboard.html" class="btn btn-primary btn-full">Go to Dashboard</a>
+                <p class="mt-16 text-muted" style="font-size: 0.8rem;">
+                    <strong>Security Warning:</strong> Never share your TOTP secret or QR code with anyone.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const content = document.getElementById('setupContent');
+            
+            try {
+                const data = await window.ordinateApi.admin.totpSetup();
+                
+                content.innerHTML = `
+                    <div class="mt-24">
+                        <p class="mb-8"><strong>1. Scan QR Code</strong></p>
+                        <div class="flex-center p-16" style="background: white; border: 1px solid var(--border); border-radius: 8px;">
+                            <!-- We can use a QR API for rendering -->
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(data.uri)}" alt="TOTP QR Code">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-24">
+                        <p class="mb-8"><strong>2. Manual Entry</strong></p>
+                        <div class="form-group">
+                            <label>Account Name</label>
+                            <input type="text" class="form-control" value="Ordinate: admin" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Secret Key (Base32)</label>
+                            <div class="flex gap-8">
+                                <input type="text" id="secretKey" class="form-control" value="${data.secret}" readonly style="font-family: monospace;">
+                                <button onclick="copySecret()" class="btn btn-sm btn-outline">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                content.innerHTML = `
+                    <div class="alert alert-error">
+                        <strong>Unauthorized:</strong> Please <a href="/admin/login.html" style="text-decoration: underline;">log in</a> to view TOTP setup.
+                    </div>
+                `;
+            }
+        });
+
+        function copySecret() {
+            const input = document.getElementById('secretKey');
+            input.select();
+            document.execCommand('copy');
+            alert('Secret key copied to clipboard');
+        }
+    </script>
+</body>
+</html>

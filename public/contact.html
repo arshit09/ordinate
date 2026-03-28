@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — Ordinate</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Ordinate Logo">
+                <span style="font-weight: 800; font-size: 1.25rem; color: var(--dark);">Ordinate</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="jobs.html">Find Jobs</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-cta">
+                <a href="admin/login.html" class="btn btn-primary btn-sm">Admin Portal</a>
+            </div>
+            <button class="nav-hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-mobile">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/jobs.html">Find Jobs</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/admin/login.html" class="btn btn-primary mt-8">Admin Portal</a>
+    </div>
+
+    <main class="page-pad">
+        <header class="page-hero">
+            <div class="container">
+                <h1>Get in <span>Touch</span></h1>
+                <p>Have questions about a role? Interested in partnering with us? We'd love to hear from you.</p>
+            </div>
+        </header>
+
+        <section class="section container">
+            <div class="grid-2 gap-40">
+                <div>
+                    <h2>Let's connect</h2>
+                    <p class="mb-24 mt-16">Our team is ready to answer your questions and assist with any inquiries you may have. We aim to respond within 24 hours.</p>
+
+                    <div class="contact-info-card card">
+                        <div class="contact-info-item">
+                            <div class="contact-icon"></div>
+                            <div>
+                                <h4>Our Office</h4>
+                                <p>123 Innovation Drive, Toronto, ON M5V 3M2</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon"></div>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>hello@ordinate.tech</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon"></div>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>+1 (416) 555-0198</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-pad">
+                    <h3>Send a message</h3>
+                    <p class="mb-24 text-muted">Fill out the form below and we'll get back to you shortly.</p>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <div id="contactAlert" class="alert alert-hidden"></div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/assets/images/logo.png" alt="Ordinate Logo">
+                    <p>Connecting top-tier talent with world-class opportunities. Reach out and start your journey with us today.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="/about.html">Our Story</a></li>
+                        <li><a href="/jobs.html">Career Ops</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ordinate Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const alert = document.getElementById('contactAlert');
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            alert.className = 'alert alert-hidden';
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                await window.ordinateApi.contact.send(data);
+                alert.textContent = 'Message sent! We\'ll get back to you soon.';
+                alert.className = 'alert alert-success';
+                e.target.reset();
+            } catch (err) {
+                alert.textContent = err.message || 'Error sending message.';
+                alert.className = 'alert alert-error';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Send Message';
+            }
+        });
+    </script>
+</body>
+</html>

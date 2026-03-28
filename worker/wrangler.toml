@@ -1,0 +1,26 @@
+name = "ordinate-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ordinate"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "RESUME_BUCKET"
+bucket_name = "ordinate-resumes"
+
+# Configure assets to serve the frontend from the public folder
+[assets]
+directory = "../public"
+binding = "ASSETS"
+
+[vars]
+ADMIN_USERNAME = "admin"
+CORS_ORIGIN = "*"
+
+# Secrets — set via CLI:
+#   wrangler secret put ADMIN_PASSWORD_HASH
+#   wrangler secret put JWT_SECRET
+#   wrangler secret put TOTP_SECRET

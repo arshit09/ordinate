@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs — Ordinate</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Ordinate Logo">
+                <span style="font-weight: 800; font-size: 1.25rem; color: var(--dark);">Ordinate</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="jobs.html">Find Jobs</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-cta">
+                <a href="admin/login.html" class="btn btn-primary btn-sm">Admin Portal</a>
+            </div>
+            <button class="nav-hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-mobile">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/jobs.html">Find Jobs</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/admin/login.html" class="btn btn-primary mt-8">Admin Portal</a>
+    </div>
+
+    <main class="page-pad">
+        <header class="page-hero">
+            <div class="container">
+                <h1>Open <span>Opportunities</span></h1>
+                <p>Browse our current openings and find your next career challenge.</p>
+            </div>
+        </header>
+
+        <section class="section container">
+            <div class="search-bar">
+                <div class="search-input-wrap">
+                    <span class="search-icon"></span>
+                    <input type="text" id="jobSearch" class="form-control" placeholder="Search by title or keyword...">
+                </div>
+                <select id="deptFilter" class="form-control">
+                    <option value="">All Departments</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Product">Product</option>
+                    <option value="Design">Design</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                </select>
+                <select id="typeFilter" class="form-control">
+                    <option value="">All Types</option>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Freelance">Freelance</option>
+                </select>
+            </div>
+
+            <div id="jobsList" class="grid-2 gap-24">
+                <!-- Jobs will be rendered here -->
+                <div class="spinner"></div>
+            </div>
+
+            <div id="noJobs" class="empty-state alert-hidden">
+                <div class="empty-icon"></div>
+                <h3>No jobs found matching your criteria.</h3>
+                <p>Try adjusting your search or filters.</p>
+                <button onclick="resetFilters()" class="btn btn-ghost mt-16">Clear All Filters</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Job Detail Modal Overlay -->
+    <div id="jobModalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Job Title</h2>
+                    <p id="modalDept" class="text-muted">Engineering • Remote</p>
+                </div>
+                <button class="modal-close" onclick="closeJobModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h4>Description</h4>
+                    <p id="modalDesc"></p>
+                </div>
+                <div class="modal-section">
+                    <h4>Requirements</h4>
+                    <p id="modalReq"></p>
+                </div>
+                <div class="modal-section">
+                    <h4>Salary Range</h4>
+                    <p id="modalSalary" class="badge badge-blue"></p>
+                </div>
+                
+                <div class="mt-40 flex-between">
+                    <a id="modalApplyBtn" href="#" class="btn btn-primary btn-lg">Apply for this Position</a>
+                    <button class="btn btn-ghost" onclick="closeJobModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ordinate Ltd. All rights reserved.</p>
+                <div class="flex gap-16">
+                    <a href="/admin/login.html">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/custom-dropdown.js"></script>
+    <script src="js/jobs.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new CustomSelect(document.getElementById('deptFilter'));
+            new CustomSelect(document.getElementById('typeFilter'));
+        });
+    </script>
+</body>
+</html>
