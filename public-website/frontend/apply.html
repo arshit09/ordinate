@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apply Now — Ordinate</title>
     <link rel="stylesheet" href="css/global.css">
-    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="nav-brand">
-                <img src="assets/images/logo.png" alt="Ordinate Logo">
-                <span style="font-weight: 800; font-size: 1.25rem; color: var(--dark);">Ordinate</span>
+                <img src="assets/images/logo.svg" alt="Ordinate Logo">
             </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
@@ -54,7 +55,7 @@
 
                     <form id="applyForm">
                         <input type="hidden" id="jobId" name="job_id">
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -73,19 +74,22 @@
 
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="+1 (416) 555-0199">
+                            <input type="tel" id="phone" name="phone" class="form-control"
+                                placeholder="+1 (416) 555-0199">
                         </div>
 
                         <div class="form-group">
                             <label for="experience">Years of Experience <span class="required">*</span></label>
-                            <input type="number" id="experience" name="years_of_experience" class="form-control" min="0" required>
+                            <input type="number" id="experience" name="years_of_experience" class="form-control" min="0"
+                                required>
                         </div>
 
                         <div class="form-group">
                             <label>Resume / CV (PDF or DOC) <span class="required">*</span></label>
                             <div class="file-drop" id="fileDrop">
                                 <div class="file-icon"></div>
-                                <p id="fileNameDisplay">Drag and drop your file here or <span class="file-cta">Browse files</span></p>
+                                <p id="fileNameDisplay">Drag and drop your file here or <span class="file-cta">Browse
+                                        files</span></p>
                                 <p class="text-muted mt-8">Max file size: 5MB</p>
                                 <input type="file" id="resumeFile" name="resume" accept=".pdf,.doc,.docx" required>
                             </div>
@@ -101,7 +105,8 @@
                 <div id="successView" class="apply-success">
                     <div class="success-icon"></div>
                     <h2>Application Received!</h2>
-                    <p>Thank you for applying for the <strong id="successJobTitle">position</strong> role. Our team will review your application and be in touch soon.</p>
+                    <p>Thank you for applying for the <strong id="successJobTitle">position</strong> role. Our team will
+                        review your application and be in touch soon.</p>
                     <a href="/jobs.html" class="btn btn-outline mt-32">Browse more jobs</a>
                 </div>
             </div>
@@ -118,4 +123,5 @@
     <script src="js/api.js"></script>
     <script src="js/apply.js"></script>
 </body>
+
 </html>

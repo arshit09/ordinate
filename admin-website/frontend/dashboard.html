@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — Ordinate</title>
     <link rel="stylesheet" href="css/global.css">
-    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 </head>
 <body class="admin-layout">
     <aside class="admin-sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="assets/images/logo.png" alt="Ordinate Logo">
+            <img src="assets/images/logo.svg" alt="Ordinate Logo">
             <span style="font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px;">ORDINATE</span>
         </div>
 
@@ -33,7 +33,12 @@
 
     <main class="admin-main">
         <header class="admin-topbar">
-            <h1 id="tabTitle">Dashboard Overview</h1>
+            <div class="flex-center gap-12">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <h1 id="tabTitle">Dashboard Overview</h1>
+            </div>
             <div class="flex-center gap-12">
                 <span id="adminName" class="badge badge-gray">admin</span>
             </div>

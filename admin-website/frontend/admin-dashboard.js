@@ -21,11 +21,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             tabBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             tabContents.forEach(c => c.style.display = 'none');
-            document.getElementById(`${id}Tab`).style.display = 'block';
+            const target = document.getElementById(`${id}Tab`);
+            if (target) target.style.display = 'block';
             tabTitle.textContent = btn.textContent.trim();
             loadTabData(id);
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
         });
     });
+
+    // ── Sidebar Management ──────────────────────────────────────────────────
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('open');
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    }
 
     async function loadTabData(tab) {
         switch (tab) {
