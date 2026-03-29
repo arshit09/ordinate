@@ -41,7 +41,6 @@ const api = {
         }),
         logout: () => apiFetch('/admin/logout', { method: 'POST' }),
         stats: () => apiFetch('/admin/stats'),
-        totpSetup: () => apiFetch('/admin/totp-setup'),
         jobs: {
             list: () => apiFetch('/admin/jobs'),
             get: (id) => apiFetch(`/admin/jobs/${id}`),

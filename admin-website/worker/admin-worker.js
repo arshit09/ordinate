@@ -260,25 +260,13 @@ export default {
     if (method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
 
     try {
-      // Auth: step 1 — credentials
+      // Auth: Single-step credentials → JWT
       if (method === 'POST' && path === '/api/admin/login') {
         const b = await request.json();
         if (!b.username || !b.password) return err('Missing credentials', 400, origin);
         if (b.username !== env.ADMIN_USERNAME) return err('Invalid credentials', 401, origin);
         if (!(await verifyPassword(b.password, env.ADMIN_PASSWORD_HASH)))
           return err('Invalid credentials', 401, origin);
-        return json({ requires_totp: true }, 200, origin);
-      }
-
-      // Auth: step 2 — TOTP → JWT
-      if (method === 'POST' && path === '/api/admin/totp') {
-        const b = await request.json();
-        if (!b.username || !b.password || !b.code) return err('Missing fields', 400, origin);
-        if (b.username !== env.ADMIN_USERNAME) return err('Invalid credentials', 401, origin);
-        if (!(await verifyPassword(b.password, env.ADMIN_PASSWORD_HASH)))
-          return err('Invalid credentials', 401, origin);
-        if (!(await verifyTOTP(b.code, env.TOTP_SECRET)))
-          return err('Invalid TOTP code', 401, origin);
 
         const now   = Math.floor(Date.now() / 1000);
         const token = await signJWT(
@@ -303,11 +291,6 @@ export default {
         const payload = await requireAuth(request, env.JWT_SECRET);
         if (!payload) return err('Unauthorized', 401, origin);
 
-        // TOTP setup
-        if (method === 'GET' && path === '/api/admin/totp-setup') {
-          const uri = generateTOTPUri(env.TOTP_SECRET, 'Ordinate', env.ADMIN_USERNAME);
-          return json({ uri, secret: env.TOTP_SECRET }, 200, origin);
-        }
 
         // Stats
         if (method === 'GET' && path === '/api/admin/stats')
