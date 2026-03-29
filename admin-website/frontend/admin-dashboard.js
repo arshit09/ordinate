@@ -304,6 +304,32 @@ function openJobForm(jobId = null) {
 function closeJobModal() { document.getElementById('jobAdminModal').classList.remove('open'); }
 function closeSlidePanel() { document.getElementById('slidePanel').classList.remove('open'); }
 
+// ── Confirmation Modal ──────────────────────────────────────────────────────
+let currentConfirmCallback = null;
+
+function openConfirmModal(title, message, onConfirm) {
+    const modal = document.getElementById('confirmModal');
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    currentConfirmCallback = onConfirm;
+    modal.classList.add('open');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirmModal').classList.remove('open');
+    currentConfirmCallback = null;
+}
+
+document.getElementById('confirmSubmitBtn')?.addEventListener('click', () => {
+    if (currentConfirmCallback) {
+        currentConfirmCallback();
+        closeConfirmModal();
+    }
+});
+
+window.closeConfirmModal = closeConfirmModal;
+
 document.getElementById('jobForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = document.getElementById('adminJobId').value;
@@ -328,12 +354,17 @@ document.getElementById('jobForm')?.addEventListener('submit', async (e) => {
 });
 
 async function deleteJob(id) {
-    if (!confirm('Are you sure? This will remove the job and potentially break application links.')) return;
-    try {
-        await window.ordinateApi.admin.jobs.delete(id);
-        window.showToast('Job deleted');
-        window.loadJobs();
-    } catch {
-        window.showToast('Error deleting job', 'error');
-    }
+    openConfirmModal(
+        'Delete Job Posting?', 
+        'Are you sure you want to delete this job? This action cannot be undone and will remove all related application data.',
+        async () => {
+            try {
+                await window.ordinateApi.admin.jobs.delete(id);
+                window.showToast('Job deleted successfully', 'success');
+                window.loadJobs();
+            } catch (err) {
+                window.showToast('Failed to delete job', 'error');
+            }
+        }
+    );
 }

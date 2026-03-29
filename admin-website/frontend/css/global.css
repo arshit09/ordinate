@@ -75,6 +75,10 @@ h4 { font-size: 1rem; font-weight: 600; }
 p  { color: var(--dark-80); }
 .text-muted { color: var(--dark-60); font-size: .9rem; }
 .text-center { text-align: center; }
+.text-primary { color: var(--primary); }
+.text-accent  { color: var(--accent); }
+.text-error   { color: var(--error); }
+.text-success { color: var(--success); }
 
 /* ── Layout ─────────────────────────────────────────────────── */
 .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
@@ -710,6 +714,16 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 .admin-modal-header { padding: 24px 28px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .admin-modal-body   { padding: 24px 28px; }
 .admin-modal-footer { padding: 16px 28px 24px; display: flex; justify-content: flex-end; gap: 10px; }
+
+/* Modal Confirm Specifics */
+.modal-confirm { max-width: 440px; }
+.confirm-content { display: flex; gap: 20px; align-items: flex-start; }
+.confirm-icon-wrap {
+    width: 48px; height: 48px; border-radius: 50%; background: #FFF5F5;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.confirm-icon-wrap svg { width: 24px; height: 24px; color: var(--error); }
+.confirm-content h4 { font-size: 1.15rem; color: var(--dark); margin-bottom: 4px; }
 
 /* ── Empty state ──────────────────────────────────────────────── */
 .empty-state { text-align: center; padding: 48px 24px; }

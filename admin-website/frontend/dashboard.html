@@ -230,6 +230,31 @@
         </div>
     </div>
 
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="admin-modal-overlay">
+        <div class="admin-modal modal-confirm">
+            <div class="admin-modal-header">
+                <h3>Confirm Action</h3>
+                <button class="btn btn-ghost" onclick="closeConfirmModal()">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+                <div class="confirm-content">
+                    <div class="confirm-icon-wrap">
+                        <i data-lucide="alert-triangle" class="text-error"></i>
+                    </div>
+                    <div>
+                        <h4 id="confirmTitle">Are you sure?</h4>
+                        <p id="confirmMessage" class="text-muted mt-8">This action cannot be undone and may affect related data.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-modal-footer">
+                <button class="btn btn-ghost" onclick="closeConfirmModal()">Cancel</button>
+                <button id="confirmSubmitBtn" class="btn btn-danger">Confirm Delete</button>
+            </div>
+        </div>
+    </div>
+
     <div id="toastContainer" class="toast-container"></div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
