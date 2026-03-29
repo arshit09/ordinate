@@ -822,3 +822,56 @@ textarea.form-control { resize: vertical; min-height: 120px; }
   .container { padding: 0 16px; }
   .hero h1 { font-size: 1.85rem; }
 }
+
+/* ── WhatsApp Floating Button ───────────────────────────────── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #fff !important;
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  z-index: 10000;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none !important;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.whatsapp-float svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+
+.whatsapp-btn-text {
+  font-size: .95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 24px;
+    right: 24px;
+    padding: 10px 20px;
+    gap: 8px;
+  }
+  .whatsapp-float svg {
+    width: 20px;
+    height: 20px;
+  }
+  .whatsapp-btn-text {
+    font-size: .88rem;
+  }
+}
