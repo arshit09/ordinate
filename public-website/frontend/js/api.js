@@ -4,7 +4,7 @@
 const _host = window.location.hostname;
 const API_BASE = (_host === 'localhost' || _host === '127.0.0.1' || _host === '')
     ? 'http://localhost:8787/api'
-    : '/api';
+    : 'https://broken-sound-2f22.jayanbhadiyadra4561.workers.dev/api';
 
 async function apiFetch(path, options = {}) {
     const defaultHeaders = {

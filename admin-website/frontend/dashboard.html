@@ -4,38 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — Ordinate</title>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
 </head>
 <body class="admin-layout">
     <aside class="admin-sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="../assets/images/logo.png" alt="Ordinate Logo">
+            <img src="assets/images/logo.png" alt="Ordinate Logo">
             <span style="font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px;">ORDINATE</span>
         </div>
-        
+
         <nav class="sidebar-nav">
             <div class="sidebar-section-label">Main</div>
-            <button class="admin-nav-item active" data-tab="overview">
-                Overview
-            </button>
-            <button class="admin-nav-item" data-tab="jobs">
-                Jobs Management
-            </button>
-            <button class="admin-nav-item" data-tab="applicants">
-                Applicants
-            </button>
-            <button class="admin-nav-item" data-tab="contacts">
-                Contact Leads
-            </button>
-            
+            <button class="admin-nav-item active" data-tab="overview">Overview</button>
+            <button class="admin-nav-item" data-tab="jobs">Jobs Management</button>
+            <button class="admin-nav-item" data-tab="applicants">Applicants</button>
+            <button class="admin-nav-item" data-tab="contacts">Contact Leads</button>
+
             <div class="sidebar-section-label">Settings</div>
-            <a href="totp-setup.html" class="admin-nav-item">
-                TOTP Security
-            </a>
-            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);">
-                Logout
-            </button>
+            <a href="totp-setup.html" class="admin-nav-item">TOTP Security</a>
+            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);">Logout</button>
         </nav>
 
         <div class="sidebar-footer">
@@ -87,9 +75,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="recentAppsTable">
-                                <!-- Rendered dynamically -->
-                            </tbody>
+                            <tbody id="recentAppsTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -113,9 +99,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="jobsTable">
-                                <!-- Rendered dynamically -->
-                            </tbody>
+                            <tbody id="jobsTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -142,9 +126,7 @@
                                     <th>Details</th>
                                 </tr>
                             </thead>
-                            <tbody id="applicantsTable">
-                                <!-- Rendered dynamically -->
-                            </tbody>
+                            <tbody id="applicantsTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -163,9 +145,7 @@
                                     <th>Received</th>
                                 </tr>
                             </thead>
-                            <tbody id="contactsTable">
-                                <!-- Rendered dynamically -->
-                            </tbody>
+                            <tbody id="contactsTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -173,18 +153,16 @@
         </div>
     </main>
 
-    <!-- Slide Panel for Applicant/Job Details -->
+    <!-- Slide Panel -->
     <div id="slidePanel" class="slide-panel">
         <div class="slide-panel-header">
             <h3 id="panelTitle">Details</h3>
             <button class="btn btn-ghost" onclick="closeSlidePanel()">&times;</button>
         </div>
-        <div class="slide-panel-body" id="panelBody">
-            <!-- Content dynamically rendered -->
-        </div>
+        <div class="slide-panel-body" id="panelBody"></div>
     </div>
 
-    <!-- Job Creation/Edit Modal -->
+    <!-- Job Modal -->
     <div id="jobAdminModal" class="admin-modal-overlay">
         <div class="admin-modal">
             <div class="admin-modal-header">
@@ -237,13 +215,13 @@
 
     <div id="toastContainer" class="toast-container"></div>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/custom-dropdown.js"></script>
-    <script src="../js/admin-dashboard.js"></script>
+    <script src="api.js"></script>
+    <script src="custom-dropdown.js"></script>
+    <script src="admin-dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-             new CustomSelect(document.getElementById('appJobFilter'));
-             new CustomSelect(document.getElementById('adminJobType'));
+            new CustomSelect(document.getElementById('appJobFilter'));
+            new CustomSelect(document.getElementById('adminJobType'));
         });
     </script>
 </body>

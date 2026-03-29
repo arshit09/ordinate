@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login — Ordinate</title>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
 </head>
 <body class="admin-login-page">
     <div class="login-card">
         <div class="login-logo">
-            <img src="../assets/images/logo.png" alt="Ordinate Logo">
+            <img src="assets/images/logo.png" alt="Ordinate Logo">
         </div>
-        
+
         <h2>Welcome back</h2>
         <p class="login-subtitle">Sign in to manage your job portal</p>
 
@@ -22,7 +22,7 @@
                 <span class="step-dot active"></span>
                 <span class="step-dot"></span>
             </div>
-            
+
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" class="form-control" value="admin" required>
@@ -31,9 +31,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" class="form-control" placeholder="••••••••" required>
             </div>
-            
+
             <div id="loginAlert" class="alert alert-hidden"></div>
-            
+
             <button type="submit" class="btn btn-primary btn-full mt-8">Continue</button>
         </form>
 
@@ -43,7 +43,7 @@
                 <span class="step-dot done"></span>
                 <span class="step-dot active"></span>
             </div>
-            
+
             <label class="text-center mb-16 d-block" style="font-weight: 600; font-size: 0.9rem;">Enter 6-digit TOTP Code</label>
             <div class="totp-input-group mb-24">
                 <input type="text" class="totp-digit" maxlength="1" pattern="\d" required focus>
@@ -53,9 +53,9 @@
                 <input type="text" class="totp-digit" maxlength="1" pattern="\d" required>
                 <input type="text" class="totp-digit" maxlength="1" pattern="\d" required>
             </div>
-            
+
             <div id="totpAlert" class="alert alert-hidden"></div>
-            
+
             <button type="submit" class="btn btn-primary btn-full">Verify & Sign In</button>
             <button type="button" id="backToLogin" class="btn btn-ghost btn-full mt-8 btn-sm">Back to Login</button>
         </form>
@@ -65,7 +65,7 @@
         </p>
     </div>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/admin-login.js"></script>
+    <script src="api.js"></script>
+    <script src="admin-login.js"></script>
 </body>
 </html>
