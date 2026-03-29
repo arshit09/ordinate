@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,25 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 </head>
+
 <body class="admin-layout">
     <aside class="admin-sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.svg" alt="Ordinate Logo">
-            <span style="font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px;">ORDINATE</span>
         </div>
 
         <nav class="sidebar-nav">
             <div class="sidebar-section-label">Main</div>
-            <button class="admin-nav-item active" data-tab="overview"><i data-lucide="layout-dashboard"></i> Overview</button>
+            <button class="admin-nav-item active" data-tab="overview"><i data-lucide="layout-dashboard"></i>
+                Overview</button>
             <button class="admin-nav-item" data-tab="jobs"><i data-lucide="briefcase"></i> Jobs Management</button>
             <button class="admin-nav-item" data-tab="applicants"><i data-lucide="users"></i> Applicants</button>
             <button class="admin-nav-item" data-tab="contacts"><i data-lucide="mail"></i> Contact Leads</button>
 
             <div class="sidebar-section-label">Settings</div>
             <a href="totp-setup.html" class="admin-nav-item"><i data-lucide="shield-check"></i> TOTP Security</a>
-            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);"><i data-lucide="log-out"></i> Logout</button>
+            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);"><i data-lucide="log-out"></i>
+                Logout</button>
         </nav>
 
         <div class="sidebar-footer">
@@ -35,7 +38,9 @@
         <header class="admin-topbar">
             <div class="flex-center gap-12">
                 <button class="sidebar-toggle" id="sidebarToggle">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
                 <h1 id="tabTitle">Dashboard Overview</h1>
             </div>
@@ -245,7 +250,8 @@
                     </div>
                     <div>
                         <h4 id="confirmTitle">Are you sure?</h4>
-                        <p id="confirmMessage" class="text-muted mt-8">This action cannot be undone and may affect related data.</p>
+                        <p id="confirmMessage" class="text-muted mt-8">This action cannot be undone and may affect
+                            related data.</p>
                     </div>
                 </div>
             </div>
@@ -272,4 +278,5 @@
         });
     </script>
 </body>
+
 </html>
