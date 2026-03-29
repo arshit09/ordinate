@@ -44,9 +44,64 @@ function renderJobs(jobs) {
         </div>
     `).join('');
     
+    // Inject Structured Data for SEO/AI
+    updateJobSchema(jobs);
+
     if (window.lucide) {
         lucide.createIcons();
     }
+}
+
+/**
+ * Injects JSON-LD structured data for the listed jobs.
+ * This helps Google Jobs and AI tools understand the openings.
+ */
+function updateJobSchema(jobs) {
+    let script = document.getElementById('jobs-schema');
+    if (!script) {
+        script = document.createElement('script');
+        script.id = 'jobs-schema';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+    }
+
+    const schemaData = jobs.slice(0, 10).map(job => ({
+        "@context": "https://schema.org/",
+        "@type": "JobPosting",
+        "title": job.title,
+        "description": job.description || 'Join the Ordinate team.',
+        "datePosted": job.created_at || new Date().toISOString(),
+        "validThrough": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+        "employmentType": job.type === 'Full-time' ? 'FULL_TIME' : (job.type === 'Contract' ? 'CONTRACTOR' : 'OTHER'),
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Ordinate Ltd.",
+            "sameAs": "https://ordinate.io",
+            "logo": "https://ordinate.io/assets/images/logo.svg"
+        },
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "123 Innovation Drive",
+                "addressLocality": "Toronto",
+                "addressRegion": "ON",
+                "postalCode": "M5V 3M2",
+                "addressCountry": "CA"
+            }
+        },
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "USD",
+            "value": {
+                "@type": "QuantitativeValue",
+                "value": job.salary_min || 100000,
+                "unitText": "YEAR"
+            }
+        }
+    }));
+
+    script.textContent = JSON.stringify(schemaData);
 }
 
 function formatDate(dateStr) {

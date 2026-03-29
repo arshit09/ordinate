@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Allow: /jobs.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /apply.html
+
+# Sitemap
+Sitemap: https://ordinate.io/sitemap.xml
+
+# AI Crawler Directives
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
