@@ -778,69 +778,6 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
 @keyframes slideDown { from { transform: translateY(0); opacity: 1; } to { transform: translateY(16px); opacity: 0; } }
 .toast.removing { animation: slideDown .3s ease forwards; }
 
-/* ── Responsive ───────────────────────────────────────────────── */
-@media (max-width: 991px) {
-  .section { padding: 64px 0; }
-  .grid-3, .grid-4 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-}
-
-@media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
-  .container { padding-inline: 24px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .form-row { grid-template-columns: 1fr; }
-  .admin-sidebar { transform: translateX(-100%); width: 280px; }
-  .admin-sidebar.open { transform: translateX(0); box-shadow: var(--shadow-xl); }
-  .admin-main { margin-left: 0; }
-  .sidebar-toggle { display: flex; }
-  .admin-topbar { padding: 0 16px; }
-  .admin-content { padding: 20px; }
-  .slide-panel { width: 100%; right: -100%; }
-  .hero { padding-block: 80px 60px; text-align: center; }
-  .hero h1 { margin: 0 auto 20px; }
-  .hero p { margin: 0 auto 32px; }
-  .hero-ctas { justify-content: center; }
-  .section { padding-block: 56px; }
-  .page-hero { padding-block: 56px 48px; }
-  .gap-40 { gap: 32px; }
-  .cta-banner { border-radius: var(--radius-lg); margin-inline: 16px; padding: 40px 24px; }
-  .stats-bar .container { justify-content: center; gap: 32px; padding-inline: 24px; }
-}
-
-@media (max-width: 480px) {
-  .container { padding-inline: 24px; }
-  .section { padding-block: 48px; }
-  .page-hero { padding-block: 48px 40px; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .stat-cards { grid-template-columns: 1fr; }
-  .stats-bar { padding-block: 32px; }
-  .stats-bar .container { flex-direction: column; align-items: center; gap: 24px; padding-inline: 24px; }
-  .hero-ctas { flex-direction: column; width: 100%; gap: 12px; }
-  .hero-ctas .btn { width: 100%; padding: 14px; }
-  .hero h1 { font-size: 2.15rem; }
-  .section-header { margin-bottom: 32px; padding-inline: 20px; }
-  .section-header h2 { font-size: 1.85rem; }
-  .job-card { padding: 20px; }
-  .card-pad { padding: 24px; }
-  .card-pad-sm { padding: 16px; }
-  .contact-info-card { padding: 24px; }
-  .gap-40 { gap: 24px; }
-  .totp-digit { width: 38px; height: 48px; font-size: 1.25rem; }
-  .totp-input-group { gap: 4px; }
-  .apply-job-banner { flex-direction: column; text-align: center; padding: 24px; }
-  .apply-job-banner .job-icon { margin: 0 auto; }
-  .search-bar { padding: 20px; gap: 16px; }
-  .search-bar select, 
-  .search-bar .custom-select-wrapper { max-width: none; }
-  .apply-wrapper { padding: 32px 0; }
-}
-
-@media (max-width: 360px) {
-  .container { padding-inline: 20px; }
-  .hero h1 { font-size: 1.85rem; }
-}
-
 /* ── WhatsApp Floating Button ───────────────────────────────── */
 .whatsapp-float {
   position: fixed;
@@ -878,18 +815,80 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
   white-space: nowrap;
 }
 
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .section { padding-block: 64px; }
+  .grid-3, .grid-4 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
 @media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .container { padding-inline: 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .footer-brand { margin-bottom: 8px; }
+  .footer-brand img { margin-inline: auto; }
+  .footer-col h4 { margin-bottom: 16px; }
+  .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+  .footer-bottom { flex-direction: column; gap: 20px; text-align: center; padding-top: 32px; }
+  
+  .hero { padding-block: 80px 60px; text-align: center; }
+  .hero h1 { margin: 0 auto 20px; font-size: 2.75rem; }
+  .hero p { margin: 0 auto 36px; padding-inline: 20px; font-size: 1.1rem; }
+  .hero-ctas { flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto; gap: 12px; }
+  .hero-ctas .btn { width: 100%; }
+  
+  .section { padding-block: 56px; }
+  .page-hero { padding-block: 64px 48px; text-align: center; }
+  .page-hero h1 { font-size: 2.25rem; }
+  
+  .gap-40 { gap: 32px; }
+  .cta-banner { margin-inline: 0; padding: 56px 24px; }
+  .stats-bar { padding-block: 40px; }
+  .stats-bar .container { flex-direction: column; gap: 32px; align-items: center; }
+
+  .whatsapp-float { bottom: 24px; right: 24px; padding: 10px 20px; gap: 8px; }
+  .whatsapp-float svg { width: 22px; height: 22px; }
+  .whatsapp-btn-text { font-size: .88rem; }
+}
+
+@media (max-width: 576px) {
+  .search-bar { flex-direction: column; align-items: stretch; padding: 24px; gap: 16px; }
+  .search-bar .search-input-wrap,
+  .search-bar select,
+  .search-bar .custom-select-wrapper { width: 100%; max-width: none; flex: none; }
+  
+  .feature-card { padding: 32px 24px; }
+  .step-item { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+  
+  .card-pad { padding: 24px; }
+  .contact-info-card { padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  :root { --nav-h: 60px; }
+  .container { padding-inline: 20px; }
+  .hero h1 { font-size: 2.15rem; }
+  .hero p { font-size: 1rem; padding-inline: 0; }
+  .section-header { margin-bottom: 32px; }
+  .section-header h2 { font-size: 1.75rem; }
+  
   .whatsapp-float {
-    bottom: 24px;
-    right: 24px;
-    padding: 10px 20px;
-    gap: 8px;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    justify-content: center;
   }
-  .whatsapp-float svg {
-    width: 20px;
-    height: 20px;
-  }
-  .whatsapp-btn-text {
-    font-size: .88rem;
-  }
+  .whatsapp-btn-text { display: none !important; }
+  .whatsapp-float svg { width: 28px; height: 28px; }
+  
+  .totp-digit { width: 40px; height: 50px; font-size: 1.25rem; }
+}
+
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.85rem; }
+  .section-header h2 { font-size: 1.5rem; }
 }
