@@ -77,12 +77,12 @@ p  { color: var(--dark-80); }
 .text-center { text-align: center; }
 
 /* ── Layout ─────────────────────────────────────────────────── */
-.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
-.section { padding: 80px 0; }
-.section-sm { padding: 48px 0; }
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.container { max-width: 1180px; margin: 0 auto; padding-inline: 24px; }
+.section { padding-block: 80px; }
+.section-sm { padding-block: 48px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; }
 .flex   { display: flex; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; }
@@ -340,7 +340,7 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
   box-shadow: 0 2px 12px rgba(0,0,0,.06);
   transition: background var(--transition);
 }
-.navbar .container { display: flex; align-items: center; height: 100%; gap: 24px; }
+.navbar .container { display: flex; align-items: center; height: 100%; gap: 16px; }
 .nav-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .nav-brand img { height: 36px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
@@ -378,7 +378,7 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
 /* ── Hero ────────────────────────────────────────────────────── */
 .hero {
   background: linear-gradient(135deg, #0F2742 0%, var(--primary) 50%, #1A4A80 100%);
-  color: #fff; padding: 100px 0 80px; position: relative; overflow: hidden;
+  color: #fff; padding-block: 100px 80px; position: relative; overflow: hidden;
 }
 .hero::before {
   content: ''; position: absolute; inset: 0;
@@ -438,7 +438,7 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
 /* ── Page Hero (inner pages) ─────────────────────────────────── */
 .page-hero {
   background: linear-gradient(135deg, #0F2742 0%, var(--primary) 100%);
-  color: #fff; padding: 64px 0 56px;
+  color: #fff; padding-block: 64px 56px;
 }
 .page-hero h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); color: #fff; margin-bottom: 10px; }
 .page-hero p  { color: rgba(255,255,255,.75); font-size: 1.05rem; }
@@ -471,8 +471,8 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
 /* ── CTA Banner ──────────────────────────────────────────────── */
 .cta-banner {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #fff; padding: 64px 0; text-align: center; border-radius: var(--radius-xl);
-  margin: 0 24px;
+  color: #fff; padding-block: 64px; text-align: center; border-radius: var(--radius-xl);
+  margin-inline: 24px;
 }
 .cta-banner h2 { color: #fff; margin-bottom: 12px; }
 .cta-banner p  { color: rgba(255,255,255,.8); margin-bottom: 28px; font-size: 1.05rem; }
@@ -787,7 +787,7 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
-  .container { padding: 0 24px; }
+  .container { padding-inline: 24px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .form-row { grid-template-columns: 1fr; }
   .admin-sidebar { transform: translateX(-100%); width: 280px; }
@@ -797,29 +797,29 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
   .admin-topbar { padding: 0 16px; }
   .admin-content { padding: 20px; }
   .slide-panel { width: 100%; right: -100%; }
-  .hero { padding: 80px 0 60px; text-align: center; }
+  .hero { padding-block: 80px 60px; text-align: center; }
   .hero h1 { margin: 0 auto 20px; }
   .hero p { margin: 0 auto 32px; }
   .hero-ctas { justify-content: center; }
-  .section { padding: 56px 0; }
-  .page-hero { padding: 56px 0 48px; }
+  .section { padding-block: 56px; }
+  .page-hero { padding-block: 56px 48px; }
   .gap-40 { gap: 32px; }
-  .cta-banner { border-radius: 0; margin: 0; padding: 48px 24px; }
-  .stats-bar .container { justify-content: center; gap: 32px; }
+  .cta-banner { border-radius: var(--radius-lg); margin-inline: 16px; padding: 40px 24px; }
+  .stats-bar .container { justify-content: center; gap: 32px; padding-inline: 24px; }
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 20px; }
-  .section { padding: 40px 0; }
-  .page-hero { padding: 48px 0 40px; }
+  .container { padding-inline: 24px; }
+  .section { padding-block: 48px; }
+  .page-hero { padding-block: 48px 40px; }
   .footer-grid { grid-template-columns: 1fr; }
   .stat-cards { grid-template-columns: 1fr; }
-  .stats-bar { padding: 32px 0; }
-  .stats-bar .container { flex-direction: column; align-items: center; gap: 24px; padding: 0; }
+  .stats-bar { padding-block: 32px; }
+  .stats-bar .container { flex-direction: column; align-items: center; gap: 24px; padding-inline: 24px; }
   .hero-ctas { flex-direction: column; width: 100%; gap: 12px; }
   .hero-ctas .btn { width: 100%; padding: 14px; }
   .hero h1 { font-size: 2.15rem; }
-  .section-header { margin-bottom: 32px; padding: 0 10px; }
+  .section-header { margin-bottom: 32px; padding-inline: 20px; }
   .section-header h2 { font-size: 1.85rem; }
   .job-card { padding: 20px; }
   .card-pad { padding: 24px; }
@@ -833,10 +833,11 @@ textarea.form-control { resize: vertical; min-height: 120px; height: auto; }
   .search-bar { padding: 20px; gap: 16px; }
   .search-bar select, 
   .search-bar .custom-select-wrapper { max-width: none; }
+  .apply-wrapper { padding: 32px 0; }
 }
 
 @media (max-width: 360px) {
-  .container { padding: 0 16px; }
+  .container { padding-inline: 20px; }
   .hero h1 { font-size: 1.85rem; }
 }
 
