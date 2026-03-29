@@ -34,5 +34,7 @@ CREATE TABLE IF NOT EXISTS contacts (
   email TEXT NOT NULL,
   message TEXT NOT NULL,
   is_read INTEGER DEFAULT 0,
-  received_at TEXT DEFAULT (datetime('now'))
+  received_at TEXT DEFAULT (datetime('now')),
+  entry_time TEXT,
+  exit_time TEXT
 );

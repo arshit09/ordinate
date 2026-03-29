@@ -156,14 +156,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const data = await window.ordinateApi.admin.contacts();
             const table = document.getElementById('contactsTable');
-            table.innerHTML = data.contacts.map(c => `
+            table.innerHTML = data.contacts.map(c => {
+                const torontoReceived = new Date(c.received_at.replace(' ', 'T') + 'Z').toLocaleString('en-US', {
+                    timeZone: 'America/Toronto',
+                    month: 'short', day: 'numeric', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+
+                const torontoExit = c.exit_time ? new Date(c.exit_time).toLocaleString('en-US', {
+                    timeZone: 'America/Toronto',
+                    month: 'short', day: 'numeric', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                }) : 'N/A';
+
+                return `
                 <tr>
                     <td><strong>${c.name}</strong></td>
                     <td>${c.email}</td>
-                    <td class="text-muted">${c.message.substring(0, 40)}${c.message.length > 40 ? '...' : ''}</td>
-                    <td>${new Date(c.received_at).toLocaleDateString()}</td>
+                    <td class="text-muted" title="${c.message}">${c.message.substring(0, 40)}${c.message.length > 40 ? '...' : ''}</td>
+                    <td style="font-size: 0.85rem; color: var(--dark-60);">${torontoReceived}</td>
+                    <td title="Toronto time" style="cursor: help; color: var(--primary); font-size: 0.85rem; font-weight: 500;">${torontoExit}</td>
                 </tr>
-            `).join('');
+            `;}).join('');
             
             if (window.lucide) {
                 lucide.createIcons();

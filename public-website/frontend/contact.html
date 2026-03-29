@@ -131,14 +131,23 @@
     <script src="js/navbar.js"></script>
     <script src="js/api.js"></script>
     <script>
+        // Track when user landed on the contact page
+        const entryTime = new Date().toISOString();
+
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Track when user submitted the form
+            const exitTime = new Date().toISOString();
+            
             const btn = e.target.querySelector('button');
             const alert = document.getElementById('contactAlert');
             const data = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                entry_time: entryTime,
+                exit_time: exitTime
             };
 
             alert.className = 'alert alert-hidden';

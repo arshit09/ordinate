@@ -23,7 +23,8 @@ async function createApplication(db, d) {
 }
 
 async function createContact(db, d) {
-  await db.prepare('INSERT INTO contacts (name,email,message) VALUES (?,?,?)').bind(d.name, d.email, d.message).run();
+  await db.prepare('INSERT INTO contacts (name,email,message,entry_time,exit_time) VALUES (?,?,?,?,?)')
+    .bind(d.name, d.email, d.message, d.entry_time ?? null, d.exit_time ?? null).run();
 }
 
 // ── R2 helpers ────────────────────────────────────────────────────────────────
