@@ -202,7 +202,7 @@ async function viewApplicant(id) {
             </select>
         </div>
         <div class="mt-24">
-            <a href="${window.ordinateApi.BASE}/admin/resume/${encodeURIComponent(app.application.resume_key)}" target="_blank" class="btn btn-primary btn-full">
+            <a href="${window.ordinateApi.BASE}/admin/resume/${encodeURIComponent(app.application.resume_key)}?token=${encodeURIComponent(localStorage.getItem('ordinate_session') || '')}" target="_blank" class="btn btn-primary btn-full">
                 Open Resume
             </a>
         </div>

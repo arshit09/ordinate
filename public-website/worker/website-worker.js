@@ -35,7 +35,7 @@ async function uploadResume(bucket, file, prefix = 'resumes') {
   await bucket.put(key, file.stream(), {
     httpMetadata: {
       contentType: file.type || 'application/octet-stream',
-      contentDisposition: `attachment; filename="${file.name}"`,
+      contentDisposition: `inline; filename="${file.name}"`,
     },
     customMetadata: { originalName: file.name, uploadedAt: new Date().toISOString() },
   });

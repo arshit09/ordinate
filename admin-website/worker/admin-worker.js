@@ -85,9 +85,15 @@ async function verifyJWT(token, secret) {
 async function requireAuth(request, secret) {
   const auth = request.headers.get('Authorization');
   if (auth?.startsWith('Bearer ')) return verifyJWT(auth.slice(7), secret);
+  
   const cookie = request.headers.get('Cookie') ?? '';
   const m = cookie.match(/session=([^;]+)/);
   if (m) return verifyJWT(m[1], secret);
+
+  const url = new URL(request.url);
+  const tokenParam = url.searchParams.get('token');
+  if (tokenParam) return verifyJWT(tokenParam, secret);
+
   return null;
 }
 
@@ -344,8 +350,9 @@ export default {
           const obj = await getResume(env.RESUME_BUCKET, key);
           if (!obj) return err('Resume not found', 404, origin);
           const h = new Headers(corsHeaders(origin));
-          h.set('Content-Type', obj.httpMetadata?.contentType ?? 'application/octet-stream');
-          h.set('Content-Disposition', obj.httpMetadata?.contentDisposition ?? 'attachment');
+          const disp = obj.httpMetadata?.contentDisposition || 'inline';
+          h.set('Content-Type', obj.httpMetadata?.contentType || 'application/pdf');
+          h.set('Content-Disposition', disp.replace('attachment', 'inline'));
           return new Response(obj.body, { headers: h });
         }
 
