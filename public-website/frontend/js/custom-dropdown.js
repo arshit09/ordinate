@@ -27,11 +27,13 @@ class CustomSelect {
         if (this.originalSelect.id) {
             wrapper.id = 'custom-' + this.originalSelect.id;
         }
+        wrapper._customSelect = this;
 
         // Hide original select but keep it in DOM for form submission and accessibility
         this.originalSelect.style.display = 'none';
         this.originalSelect.setAttribute('aria-hidden', 'true');
         this.originalSelect.parentNode.insertBefore(wrapper, this.originalSelect);
+        wrapper.appendChild(this.originalSelect);
 
         // Build Custom Structure
         this.customSelect = document.createElement('div');

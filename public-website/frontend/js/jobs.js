@@ -174,6 +174,16 @@ function resetFilters() {
     document.getElementById('jobSearch').value = '';
     document.getElementById('deptFilter').value = '';
     document.getElementById('typeFilter').value = '';
+    
+    // Sync custom dropdowns if they exist
+    const selects = ['deptFilter', 'typeFilter'];
+    selects.forEach(id => {
+        const customEl = document.getElementById('custom-' + id);
+        if (customEl && customEl._customSelect) {
+            customEl._customSelect.refresh();
+        }
+    });
+
     filterJobs();
 }
 
