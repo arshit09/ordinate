@@ -46,7 +46,7 @@
             <div class="apply-wrapper">
                 <div id="applyCard" class="card card-pad">
                     <div id="jobBanner" class="apply-job-banner">
-                        <div class="job-icon"></div>
+                        <div class="job-icon"><i data-lucide="briefcase"></i></div>
                         <div>
                             <h3 id="jobTitle">Position Name</h3>
                             <p id="jobMeta" class="text-muted">Loading job details...</p>
@@ -87,7 +87,7 @@
                         <div class="form-group">
                             <label>Resume / CV (PDF or DOC) <span class="required">*</span></label>
                             <div class="file-drop" id="fileDrop">
-                                <div class="file-icon"></div>
+                                <div class="file-icon"><i data-lucide="upload-cloud" size="32"></i></div>
                                 <p id="fileNameDisplay">Drag and drop your file here or <span class="file-cta">Browse
                                         files</span></p>
                                 <p class="text-muted mt-8">Max file size: 5MB</p>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div id="successView" class="apply-success">
-                    <div class="success-icon"></div>
+                    <div class="success-icon text-success"><i data-lucide="check-circle" size="64"></i></div>
                     <h2>Application Received!</h2>
                     <p>Thank you for applying for the <strong id="successJobTitle">position</strong> role. Our team will
                         review your application and be in touch soon.</p>
@@ -119,6 +119,10 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
     <script src="js/navbar.js"></script>
     <script src="js/api.js"></script>
     <script src="js/apply.js"></script>

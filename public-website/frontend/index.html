@@ -73,17 +73,23 @@
             </div>
             <div class="grid-3">
                 <div class="feature-card">
-                    <div class="feature-icon feature-icon-blue"></div>
+                    <div class="feature-icon feature-icon-blue">
+                        <i data-lucide="briefcase"></i>
+                    </div>
                     <h3>Curated Roles</h3>
                     <p>We hand-pick every job posting to ensure quality and relevance to your career goals.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon feature-icon-orange"></div>
+                    <div class="feature-icon feature-icon-orange">
+                        <i data-lucide="zap"></i>
+                    </div>
                     <h3>Fast Response</h3>
                     <p>Our streamlined application process ensures you get feedback within days, not months.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon feature-icon-green"></div>
+                    <div class="feature-icon feature-icon-green">
+                        <i data-lucide="trending-up"></i>
+                    </div>
                     <h3>Growth Focused</h3>
                     <p>We're not just a platform; we're a partner in your long-term professional development.</p>
                 </div>
@@ -166,14 +172,18 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Ordinate Ltd. All rights reserved.</p>
                 <div class="flex gap-16">
-                    <a href="#">Twitter</a>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">GitHub</a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
     <script src="js/navbar.js"></script>
     <script src="js/api.js"></script>
 </body>

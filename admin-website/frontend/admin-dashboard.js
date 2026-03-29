@@ -97,6 +97,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const filter = document.getElementById('appJobFilter');
             filter.innerHTML = '<option value="">All Job Positions</option>' +
                 data.jobs.map(j => `<option value="${j.id}">${j.title}</option>`).join('');
+            
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         } catch (err) {
             showToast('Error loading jobs', 'error');
         }
@@ -130,6 +134,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </td>
             </tr>
         `).join('');
+        
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     }
 
     // ── Contacts ──────────────────────────────────────────────────────────────
@@ -145,6 +153,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${new Date(c.received_at).toLocaleDateString()}</td>
                 </tr>
             `).join('');
+            
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         } catch (err) {
             showToast('Error loading contacts', 'error');
         }
@@ -231,6 +243,10 @@ async function viewApplicant(id) {
             </a>
         </div>
     `;
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 
     if (window.CustomSelect) {
         new CustomSelect(document.getElementById('appStatusSelect'));

@@ -43,6 +43,10 @@ function renderJobs(jobs) {
             </div>
         </div>
     `).join('');
+    
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 }
 
 function formatDate(dateStr) {

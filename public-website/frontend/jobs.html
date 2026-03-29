@@ -45,7 +45,7 @@
         <section class="section container">
             <div class="search-bar">
                 <div class="search-input-wrap">
-                    <span class="search-icon"></span>
+                    <span class="search-icon"><i data-lucide="search" size="18"></i></span>
                     <input type="text" id="jobSearch" class="form-control" placeholder="Search by title or keyword...">
                 </div>
                 <select id="deptFilter" class="form-control">
@@ -71,7 +71,7 @@
             </div>
 
             <div id="noJobs" class="empty-state alert-hidden">
-                <div class="empty-icon"></div>
+                <div class="empty-icon"><i data-lucide="briefcase" size="48"></i></div>
                 <h3>No jobs found matching your criteria.</h3>
                 <p>Try adjusting your search or filters.</p>
                 <button onclick="resetFilters()" class="btn btn-ghost mt-16">Clear All Filters</button>
@@ -119,6 +119,10 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
     <script src="js/navbar.js"></script>
     <script src="js/api.js"></script>
     <script src="js/custom-dropdown.js"></script>

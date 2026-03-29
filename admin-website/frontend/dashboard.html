@@ -16,14 +16,14 @@
 
         <nav class="sidebar-nav">
             <div class="sidebar-section-label">Main</div>
-            <button class="admin-nav-item active" data-tab="overview">Overview</button>
-            <button class="admin-nav-item" data-tab="jobs">Jobs Management</button>
-            <button class="admin-nav-item" data-tab="applicants">Applicants</button>
-            <button class="admin-nav-item" data-tab="contacts">Contact Leads</button>
+            <button class="admin-nav-item active" data-tab="overview"><i data-lucide="layout-dashboard"></i> Overview</button>
+            <button class="admin-nav-item" data-tab="jobs"><i data-lucide="briefcase"></i> Jobs Management</button>
+            <button class="admin-nav-item" data-tab="applicants"><i data-lucide="users"></i> Applicants</button>
+            <button class="admin-nav-item" data-tab="contacts"><i data-lucide="mail"></i> Contact Leads</button>
 
             <div class="sidebar-section-label">Settings</div>
-            <a href="totp-setup.html" class="admin-nav-item">TOTP Security</a>
-            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);">Logout</button>
+            <a href="totp-setup.html" class="admin-nav-item"><i data-lucide="shield-check"></i> TOTP Security</a>
+            <button id="logoutBtn" class="admin-nav-item" style="color: var(--error);"><i data-lucide="log-out"></i> Logout</button>
         </nav>
 
         <div class="sidebar-footer">
@@ -49,19 +49,31 @@
             <div id="overviewTab" class="admin-tab-content">
                 <div class="stat-cards">
                     <div class="stat-card">
-                        <span class="sc-label">Total Jobs</span>
+                        <div class="flex-between">
+                            <span class="sc-label">Total Jobs</span>
+                            <i data-lucide="file-text" class="sc-icon text-muted" size="20"></i>
+                        </div>
                         <div class="sc-value" id="statTotalJobs">0</div>
                     </div>
                     <div class="stat-card">
-                        <span class="sc-label">Active Roles</span>
+                        <div class="flex-between">
+                            <span class="sc-label">Active Roles</span>
+                            <i data-lucide="check-circle" class="sc-icon text-primary" size="20"></i>
+                        </div>
                         <div class="sc-value" id="statActiveJobs" style="color: var(--primary);">0</div>
                     </div>
                     <div class="stat-card">
-                        <span class="sc-label">Applications</span>
+                        <div class="flex-between">
+                            <span class="sc-label">Applications</span>
+                            <i data-lucide="users" class="sc-icon text-muted" size="20"></i>
+                        </div>
                         <div class="sc-value" id="statTotalApps">0</div>
                     </div>
                     <div class="stat-card">
-                        <span class="sc-label">Pending Review</span>
+                        <div class="flex-between">
+                            <span class="sc-label">Pending Review</span>
+                            <i data-lucide="clock" class="sc-icon text-accent" size="20"></i>
+                        </div>
                         <div class="sc-value" id="statPendingApps" style="color: var(--accent);">0</div>
                     </div>
                 </div>
@@ -220,6 +232,10 @@
 
     <div id="toastContainer" class="toast-container"></div>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
     <script src="api.js"></script>
     <script src="custom-dropdown.js"></script>
     <script src="admin-dashboard.js"></script>
