@@ -51,10 +51,28 @@ function renderJobs(jobs) {
 
 function formatDate(dateStr) {
     if (!dateStr) return 'Recently';
-    const date = new Date(dateStr);
+    
+    // SQLite/D1 returns 'YYYY-MM-DD HH:MM:SS' in UTC. 
+    // We convert to ISO 'YYYY-MM-DDTHH:MM:SSZ' to ensure UTC parsing across browsers.
+    const date = new Date(dateStr.replace(' ', 'T') + 'Z');
     const now = new Date();
-    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) return 'Today';
+    const diffMs = now - date;
+    
+    // Handle small clock drift or future dates
+    if (diffMs < 0) return 'Just now';
+    
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    if (diffMins < 60) {
+        if (diffMins <= 1) return 'Just now';
+        return `${diffMins}m ago`;
+    }
+    
+    const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+    if (diffHrs < 24) {
+        return `${diffHrs}h ago`;
+    }
+    
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (diffDays === 1) return 'Yesterday';
     return `${diffDays}d ago`;
 }
