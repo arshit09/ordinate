@@ -265,12 +265,39 @@ async function updateAppStatus(id, status) {
     }
 }
 
+async function editJob(id) {
+    try {
+        const { job } = await window.ordinateApi.admin.jobs.get(id);
+        openJobForm(id);
+        document.getElementById('adminJobTitle').value = job.title;
+        document.getElementById('adminJobDept').value = job.department || '';
+        document.getElementById('adminJobLoc').value = job.location || '';
+        document.getElementById('adminJobType').value = job.type;
+        document.getElementById('adminJobSalary').value = job.salary_range || '';
+        document.getElementById('adminJobDesc').value = job.description || '';
+        
+        // Update Custom Select if it exists
+        const typeSelect = document.getElementById('adminJobType');
+        typeSelect.dispatchEvent(new CustomEvent('change', { detail: { fromExternal: true } }));
+    } catch (err) {
+        window.showToast('Error loading job details', 'error');
+    }
+}
+
 function openJobForm(jobId = null) {
     const modal = document.getElementById('jobAdminModal');
     const form = document.getElementById('jobForm');
     document.getElementById('jobModalTitle').textContent = jobId ? 'Edit Job' : 'Create New Job';
     form.reset();
     document.getElementById('adminJobId').value = jobId;
+    
+    if (!jobId) {
+        // Reset custom select for new job
+        const typeSelect = document.getElementById('adminJobType');
+        typeSelect.selectedIndex = 0;
+        typeSelect.dispatchEvent(new CustomEvent('change', { detail: { fromExternal: true } }));
+    }
+    
     modal.classList.add('open');
 }
 

@@ -305,6 +305,13 @@ export default {
         if (method === 'GET' && path === '/api/admin/jobs')
           return json({ jobs: await getAllJobs(env.DB) }, 200, origin);
 
+        if (method === 'GET' && match(path, /^\/api\/admin\/jobs\/\d+$/)) {
+          const id = +seg(path, 3);
+          const job = await getJobById(env.DB, id);
+          if (!job) return err('Job not found', 404, origin);
+          return json({ job }, 200, origin);
+        }
+
         if (method === 'POST' && path === '/api/admin/jobs') {
           const b = await request.json();
           if (!b.title) return err('Title required', 400, origin);

@@ -44,6 +44,7 @@ const api = {
         totpSetup: () => apiFetch('/admin/totp-setup'),
         jobs: {
             list: () => apiFetch('/admin/jobs'),
+            get: (id) => apiFetch(`/admin/jobs/${id}`),
             create: (data) => apiFetch('/admin/jobs', {
                 method: 'POST',
                 body: JSON.stringify(data),
