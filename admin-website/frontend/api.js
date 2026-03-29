@@ -62,6 +62,7 @@ const api = {
                 method: 'PATCH',
                 body: JSON.stringify(data),
             }),
+            delete: (id) => apiFetch(`/admin/applications/${id}`, { method: 'DELETE' }),
         },
         contacts: () => apiFetch('/admin/contacts'),
     }

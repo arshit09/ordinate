@@ -138,7 +138,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${new Date(app.applied_at).toLocaleDateString()}</td>
                 <td><span class="badge ${getStatusBadge(app.status)}">${app.status}</span></td>
                 <td class="actions">
-                    <button onclick="viewApplicant(${app.id})">View Details</button>
+                    <button onclick="viewApplicant(${app.id})" class="btn-ghost btn-sm">View</button>
+                    <button class="btn-danger btn-icon btn-sm" onclick="deleteApplicant(${app.id})" title="Delete Applicant">
+                        <i data-lucide="trash-2"></i>
+                    </button>
                 </td>
             </tr>
         `).join('');
@@ -383,6 +386,29 @@ async function deleteJob(id) {
                 window.loadJobs();
             } catch (err) {
                 window.showToast('Failed to delete job', 'error');
+            }
+        }
+    );
+}
+
+async function deleteApplicant(id) {
+    openConfirmModal(
+        'Delete Applicant?', 
+        'Are you sure you want to delete this applicant? This will also permanently delete their resume from the storage.',
+        async () => {
+            try {
+                await window.ordinateApi.admin.applications.delete(id);
+                window.showToast('Applicant deleted successfully', 'success');
+                // Refresh both if we are on the applicants tab
+                window.loadApplicants();
+                window.loadOverview();
+                // Close slide panel if it was open for this applicant
+                const panel = document.getElementById('slidePanel');
+                if (panel.classList.contains('open')) {
+                    panel.classList.remove('open');
+                }
+            } catch (err) {
+                window.showToast('Failed to delete applicant', 'error');
             }
         }
     );

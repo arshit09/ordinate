@@ -193,6 +193,18 @@ async function updateApplicationStatus(db, id, status, notes) {
     .bind(status, notes ?? null, id).run();
 }
 
+async function deleteApplication(db, bucket, id) {
+  const app = await db.prepare('SELECT resume_key FROM applications WHERE id=?').bind(id).first();
+  if (app && app.resume_key) {
+    try {
+      await bucket.delete(app.resume_key);
+    } catch (e) {
+      console.error('Failed to delete resume from R2:', e);
+    }
+  }
+  await db.prepare('DELETE FROM applications WHERE id=?').bind(id).run();
+}
+
 async function getContacts(db) {
   return (await db.prepare('SELECT * FROM contacts ORDER BY received_at DESC').all()).results;
 }
@@ -348,6 +360,11 @@ export default {
           const ok = ['pending','reviewed','shortlisted','rejected'];
           if (!ok.includes(b.status)) return err('Invalid status', 400, origin);
           await updateApplicationStatus(env.DB, id, b.status, b.notes);
+          return json({ success: true }, 200, origin);
+        }
+
+        if (method === 'DELETE' && match(path, /^\/api\/admin\/applications\/\d+$/)) {
+          await deleteApplication(env.DB, env.RESUME_BUCKET, +seg(path, 3));
           return json({ success: true }, 200, origin);
         }
 
