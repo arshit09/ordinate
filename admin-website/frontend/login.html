@@ -13,6 +13,11 @@
             <img src="assets/images/logo.svg" alt="Ordinate Logo">
         </div>
 
+        <div class="step-indicator">
+            <div id="step-1" class="step-dot active"></div>
+            <div id="step-2" class="step-dot"></div>
+        </div>
+
         <h2>Welcome back</h2>
         <p class="login-subtitle">Sign in to manage your job portal</p>
 
@@ -28,7 +33,28 @@
 
             <div id="loginAlert" class="alert alert-hidden"></div>
 
-            <button type="submit" class="btn btn-primary btn-full mt-8">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-full mt-8">Continue</button>
+        </form>
+
+        <form id="totpForm" class="alert-hidden">
+            <p class="text-center mb-24 text-muted">Enter the 6-digit code from your authenticator app.</p>
+            
+            <div class="totp-input-group">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+                <input type="text" class="totp-digit" maxlength="1" pattern="\d" inputmode="numeric">
+            </div>
+
+            <div id="totpAlert" class="alert alert-hidden mt-24"></div>
+
+            <button type="submit" class="btn btn-primary btn-full mt-24">Verify & Sign In</button>
+            
+            <button type="button" id="backToLogin" class="btn btn-ghost btn-full mt-16 btn-sm">
+                Back to credentials
+            </button>
         </form>
 
         <p class="text-center mt-24 text-muted" style="font-size: 0.82rem;">

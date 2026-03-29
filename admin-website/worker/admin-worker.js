@@ -58,7 +58,7 @@ async function signJWT(payload, secret) {
   return `${data}.${b64urlEncode(sig)}`;
 }
 
-async function verifyJWT(token, secret) {
+async function verifyJWT(token, secret, checkAuthenticated = true) {
   try {
     const [header, body, sig] = token.split('.');
     if (!header || !body || !sig) return null;
@@ -75,7 +75,7 @@ async function verifyJWT(token, secret) {
     const padding = (4 - (padded.length % 4)) % 4;
     const payload = JSON.parse(decodeURIComponent(escape(atob(padded + '='.repeat(padding)))));
     if (payload.exp < Math.floor(Date.now() / 1000)) return null;
-    if (!payload.authenticated) return null;
+    if (checkAuthenticated && !payload.authenticated) return null;
     return payload;
   } catch {
     return null;
@@ -84,15 +84,15 @@ async function verifyJWT(token, secret) {
 
 async function requireAuth(request, secret) {
   const auth = request.headers.get('Authorization');
-  if (auth?.startsWith('Bearer ')) return verifyJWT(auth.slice(7), secret);
+  if (auth?.startsWith('Bearer ')) return verifyJWT(auth.slice(7), secret, true);
   
   const cookie = request.headers.get('Cookie') ?? '';
   const m = cookie.match(/session=([^;]+)/);
-  if (m) return verifyJWT(m[1], secret);
+  if (m) return verifyJWT(m[1], secret, true);
 
   const url = new URL(request.url);
   const tokenParam = url.searchParams.get('token');
-  if (tokenParam) return verifyJWT(tokenParam, secret);
+  if (tokenParam) return verifyJWT(tokenParam, secret, true);
 
   return null;
 }
@@ -260,7 +260,7 @@ export default {
     if (method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
 
     try {
-      // Auth: Single-step credentials → JWT
+      // Auth: Two-step credentials + TOTP → JWT
       if (method === 'POST' && path === '/api/admin/login') {
         const b = await request.json();
         if (!b.username || !b.password) return err('Missing credentials', 400, origin);
@@ -268,15 +268,45 @@ export default {
         if (!(await verifyPassword(b.password, env.ADMIN_PASSWORD_HASH)))
           return err('Invalid credentials', 401, origin);
 
-        const now   = Math.floor(Date.now() / 1000);
+        const now = Math.floor(Date.now() / 1000);
+        const hasTotp = !!env.TOTP_SECRET;
+
+        // If TOTP is required, issue a short-lived, unauthenticated token
         const token = await signJWT(
-          { sub: b.username, iat: now, exp: now + 8 * 3600, authenticated: true },
+          { sub: b.username, iat: now, exp: now + (hasTotp ? 300 : 8 * 3600), authenticated: !hasTotp },
           env.JWT_SECRET
         );
+
         const headers = new Headers({ 'Content-Type': 'application/json', ...corsHeaders(origin) });
-        headers.append('Set-Cookie',
-          `session=${token}; HttpOnly; SameSite=None; Secure; Path=/; Max-Age=${8 * 3600}`);
-        return new Response(JSON.stringify({ success: true, token }), { status: 200, headers });
+        if (!hasTotp) {
+          headers.append('Set-Cookie', `session=${token}; HttpOnly; SameSite=None; Secure; Path=/; Max-Age=${8 * 3600}`);
+        }
+
+        return new Response(JSON.stringify({ success: true, token, mfa_required: hasTotp }), { status: 200, headers });
+      }
+
+      if (method === 'POST' && path === '/api/admin/totp') {
+        const b = await request.json();
+        if (!b.code || !b.token) return err('Code and token required', 400, origin);
+
+        // Verify the pre-auth token (checkAuthenticated = false)
+        const payload = await verifyJWT(b.token, env.JWT_SECRET, false);
+        if (!payload || payload.authenticated) return err('Invalid or expired session', 401, origin);
+
+        // Verify TOTP
+        if (!(await verifyTOTP(b.code, env.TOTP_SECRET))) {
+          return err('Invalid verification code', 401, origin);
+        }
+
+        const now = Math.floor(Date.now() / 1000);
+        const fullToken = await signJWT(
+          { sub: payload.sub, iat: now, exp: now + 8 * 3600, authenticated: true },
+          env.JWT_SECRET
+        );
+
+        const headers = new Headers({ 'Content-Type': 'application/json', ...corsHeaders(origin) });
+        headers.append('Set-Cookie', `session=${fullToken}; HttpOnly; SameSite=None; Secure; Path=/; Max-Age=${8 * 3600}`);
+        return new Response(JSON.stringify({ success: true, token: fullToken }), { status: 200, headers });
       }
 
       // Logout
