@@ -81,18 +81,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const data = await window.ordinateApi.admin.jobs.list();
             const table = document.getElementById('jobsTable');
-            table.innerHTML = data.jobs.map(job => `
+            table.innerHTML = data.jobs.map(job => {
+                const torontoTime = new Date(job.created_at.replace(' ', 'T') + 'Z').toLocaleString('en-US', {
+                    timeZone: 'America/Toronto',
+                    month: 'short', day: 'numeric', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+
+                return `
                 <tr>
                     <td><strong>${job.title}</strong></td>
                     <td>${job.department || '-'}</td>
                     <td>${job.location || '-'}</td>
+                    <td title="Toronto time" style="cursor: help; color: var(--dark-60); font-size: 0.85rem;">${torontoTime}</td>
                     <td><span class="badge ${job.is_active ? 'badge-green' : 'badge-gray'}">${job.is_active ? 'Active' : 'Draft'}</span></td>
                     <td class="actions">
                         <button onclick="editJob(${job.id})">Edit</button>
                         <button class="btn-danger" onclick="deleteJob(${job.id})">Delete</button>
                     </td>
                 </tr>
-            `).join('');
+            `;}).join('');
 
             const filter = document.getElementById('appJobFilter');
             filter.innerHTML = '<option value="">All Job Positions</option>' +
@@ -269,6 +277,17 @@ async function editJob(id) {
     try {
         const { job } = await window.ordinateApi.admin.jobs.get(id);
         openJobForm(id);
+        
+        const torontoTime = new Date(job.created_at.replace(' ', 'T') + 'Z').toLocaleString('en-US', {
+            timeZone: 'America/Toronto',
+            month: 'short', day: 'numeric', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+        });
+        
+        const modalTitle = document.getElementById('jobModalTitle');
+        modalTitle.innerHTML = `Edit Job <span class="text-muted" style="font-size: 0.8rem; font-weight: normal;" title="Toronto time">(Created: ${torontoTime})</span>`;
+        if (window.lucide) lucide.createIcons();
+
         document.getElementById('adminJobTitle').value = job.title;
         document.getElementById('adminJobDept').value = job.department || '';
         document.getElementById('adminJobLoc').value = job.location || '';
