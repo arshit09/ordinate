@@ -2,13 +2,23 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5ZRPCJ47S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-S5ZRPCJ47S');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
     <title>Contact Ordinate — Get in Touch for Opportunities</title>
     <meta name="title" content="Contact Ordinate — Get in Touch for Opportunities">
-    <meta name="description" content="Have questions about job roles or corporate partnerships? Contact Ordinate's team today. We're here to help you scale your team or find your next great role.">
+    <meta name="description"
+        content="Have questions about job roles or corporate partnerships? Contact Ordinate's team today. We're here to help you scale your team or find your next great role.">
     <meta name="keywords" content="contact ordinate, hiring help, job seeker support, partnership inquiries tech">
     <meta name="robots" content="index, follow">
 
@@ -17,14 +27,16 @@
     <meta property="og:url" content="https://ordinate.io/contact.html">
     <meta property="og:site_name" content="Ordinate">
     <meta property="og:title" content="Contact Ordinate — Get in Touch for Opportunities">
-    <meta property="og:description" content="Reach out to the Ordinate team for help with your next career move or corporate hiring needs. We're here to help you scale your team.">
+    <meta property="og:description"
+        content="Reach out to the Ordinate team for help with your next career move or corporate hiring needs. We're here to help you scale your team.">
     <meta property="og:image" content="https://ordinate.io/assets/images/logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://ordinate.io/contact.html">
     <meta property="twitter:title" content="Contact Ordinate — Get in Touch for Opportunities">
-    <meta property="twitter:description" content="Reach out to the Ordinate team for help with your next career move or corporate hiring needs. We're here to help you scale your team.">
+    <meta property="twitter:description"
+        content="Reach out to the Ordinate team for help with your next career move or corporate hiring needs. We're here to help you scale your team.">
     <meta property="twitter:image" content="https://ordinate.io/assets/images/logo.png">
 
     <!-- Canonical -->
@@ -121,7 +133,9 @@
                         <div class="form-group">
                             <label class="checkbox-group">
                                 <input type="checkbox" id="privacyConsent" required>
-                                <span>By sending this message, I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and acknowledge that Ordinate Ltd. may use my data as described.</span>
+                                <span>By sending this message, I agree to the <a href="privacy.html"
+                                        target="_blank">Privacy Policy</a> and acknowledge that Ordinate Ltd. may use my
+                                    data as described.</span>
                             </label>
                         </div>
 
@@ -169,10 +183,10 @@
 
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             // Track when user submitted the form
             const exitTime = new Date().toISOString();
-            
+
             const btn = e.target.querySelector('button');
             const alert = document.getElementById('contactAlert');
             const data = {
